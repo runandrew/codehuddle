@@ -25,6 +25,10 @@ export const Editor = ({ AceEditor, onChange, text, options }) => {
         showGutter: options.showGutter,
         fontSize: options.textSize ? 24 : 18
       }}
+      editorProps={{
+        autoScrollEditorIntoView: false,
+        $blockScrolling: Infinity
+      }}
     />
   );
 };

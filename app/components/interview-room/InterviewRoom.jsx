@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Required files
-import Canvas from '../Canvas';
+import Whiteboard from '../Whiteboard';
 import Editor from '../Editor';
 import InterviewRoomOptions from '../InterviewRoomOptions';
 
@@ -20,7 +20,7 @@ export const InterviewRoom = ({ AceEditor, onChange, text }) => {
           <Editor />
         </div>
         <div id="ir-canvas-col" className="col s12 l5">
-          <Canvas />
+          <Whiteboard />
         </div>
       </div>
     </div>

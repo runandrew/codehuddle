@@ -1,8 +1,15 @@
 'use strict';
 import React from 'react';
+
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+
+// For Material-UI: Provides `onTouchTap()` event; Much like an `onClick()` for touch devices.
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Material Theme Provider. Wraps everything in `render()` method below
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import store from './store';
 import Login from './components/Login';
@@ -16,11 +23,13 @@ function interviewOnEnter (nextState) {
 }
 
 render (
-  <Provider store={ store }>
-    <Router history={ browserHistory }>
-      <Route path="/" component={ Splash } />
-      <Route path="/interviewRoom" component={InterviewRoom} onEnter={ interviewOnEnter }/>
-    </Router>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={ store }>
+      <Router history={ browserHistory }>
+        <Route path="/" component={ Splash } />
+        <Route path="/interviewRoom" component={InterviewRoom} onEnter={ interviewOnEnter }/>
+      </Router>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('main')
 );
