@@ -98,6 +98,14 @@ div[role="navigation"] ul li {
 #whiteboard {
   border: solid black 1px; }
 
+a:hover,
+a:visited,
+a:link {
+  color: white; }
+
+a:active {
+  color: gray; }
+
 /* Footer */
 div[role="footer"] {
   position: absolute;

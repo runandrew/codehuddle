@@ -2,7 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Aldrich');
 @import url('https://fonts.googleapis.com/css?family=Allura');
-
 @import '_ir-style';
 
 /* Variables */
@@ -34,9 +33,11 @@ main {
 
 
 /* Helpers */
+
 .splash-info-margins {
   margin: 40px 0px 40px 0px;
 }
+
 
 /* Navigation */
 
@@ -83,7 +84,6 @@ div[role="navigation"] {
     }
     #get-started-btn li a {
       animation-delay: 1s;
-
     }
     #header-down-arrow-icon,
     a i.medium.material-icons {
@@ -137,7 +137,17 @@ div[role="navigation"] {
   border: solid black 1px;
 }
 
+a:hover, 
+a:visited,
+a:link {
+  color: white;
+}
+
+a:active {
+  color: gray;
+}
 /* Footer */
+
 div[role="footer"] {
   position: absolute;
   z-index: 10000;

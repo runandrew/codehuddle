@@ -1,38 +1,46 @@
-import axios from 'axios'
+import axios from 'axios';
+import {browserHistory} from 'react-router';
 
-const reducer = (state=null, action) => {
-  switch(action.type) {
-  case AUTHENTICATED:
-    return action.user  
+const reducer = (state = null, action) => {
+  switch (action.type) {
+    case AUTHENTICATED:
+      return action.user;
   }
-  return state
-}
+  return state;
+};
 
-const AUTHENTICATED = 'AUTHENTICATED'
+const AUTHENTICATED = 'AUTHENTICATED';
 export const authenticated = user => ({
   type: AUTHENTICATED, user
-})
+});
 
 export const login = (username, password) =>
   dispatch =>
-    axios.post('/api/auth/local/login',
+    // we'll need to change this to '/api/auth/local/login' if we implement OAuth
+    axios.post('/api/auth/login',
       {username, password})
-      .then(() => dispatch(whoami()))
-      .catch(() => dispatch(whoami()))      
+      .then(() => {
+        dispatch(whoami());
+        browserHistory.push('/');
+      })
+      .catch(() => {
+        dispatch(whoami());
+        console.log('login failure');  
+      });
 
 export const logout = () =>
   dispatch =>
     axios.post('/api/auth/logout')
       .then(() => dispatch(whoami()))
-      .catch(() => dispatch(whoami()))
+      .catch(() => dispatch(whoami()));
 
 export const whoami = () =>
   dispatch =>
     axios.get('/api/auth/whoami')
       .then(response => {
-        const user = response.data
-        dispatch(authenticated(user))
+        const user = response.data;
+        dispatch(authenticated(user));
       })
-      .catch(failed => dispatch(authenticated(null)))
+      .catch(failed => dispatch(authenticated(null)));
 
-export default reducer
+export default reducer;

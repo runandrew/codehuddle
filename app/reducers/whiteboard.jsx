@@ -1,4 +1,3 @@
-
 // Required libraries
 import Immutable from 'immutable';
 
@@ -18,7 +17,10 @@ export const requestHistory = () => {
 
 export const clearHistory = () => {
   return {
-    type: CLEAR_HISTORY
+    type: CLEAR_HISTORY,
+    meta: {
+      remote: true
+    }
   };
 };
 
@@ -29,10 +31,10 @@ export const initCanvas = (ctx) => {
   };
 };
 
-export const setCoordinates = (lastPx, currentPx, color) => {
+export const setCoordinates = (lastPx, currentPx, color, strokeWidth) => {
   return {
     type: SET_COORDINATES,
-    lastDraw: { lastPx, currentPx, color },
+    lastDraw: {lastPx, currentPx, color, strokeWidth},
     meta: {
       remote: true
     }
@@ -40,46 +42,33 @@ export const setCoordinates = (lastPx, currentPx, color) => {
 };
 
 /* ------------       REDUCER     ------------------ */
-const initialWhiteboardData = Immutable.fromJS(
-  {
-    lastDraw: {
-      lastPx: { x: null, y: null },
-      currentPx: { x: null, y: null },
-      color: '#000000'
-    },
-    ctx: {
-      notReady: true
-    },
-    drawingHistory: []
-  }
-);
+const initialWhiteboardData = Immutable.fromJS({
+  lastDraw: {
+    lastPx: { x: null, y: null },
+    currentPx: { x: null, y: null },
+    color: '#000000',
+    strokeWidth: 4
+  },
+  drawingHistory: []
+});
 
 export default function reducer (whiteboardData = initialWhiteboardData, action) {
-  let newWhiteboardData = whiteboardData;
-
   switch (action.type) {
-
     case SET_COORDINATES:
       const lastDrawImm = Immutable.fromJS(action.lastDraw);
-      newWhiteboardData = newWhiteboardData.setIn(['lastDraw'], lastDrawImm);
-      break;
-
-    case INIT_CANVAS:
-      newWhiteboardData = newWhiteboardData.setIn(['ctx'], action.ctx);
-      break;
+      const newWhiteboardData = whiteboardData.setIn(['lastDraw'], lastDrawImm);
+      const history = newWhiteboardData.getIn(['drawingHistory']);
+      const newHistory = history.push(lastDrawImm);
+      return newWhiteboardData.setIn(['drawingHistory'], newHistory);
 
     case REQUEST_HISTORY:
-      newWhiteboardData = newWhiteboardData.setIn(['drawingHistory'], action.drawingHistory);
-      break;
+      return whiteboardData.setIn(['drawingHistory'], Immutable.fromJS(action.drawingHistory));
 
     case CLEAR_HISTORY:
-      newWhiteboardData = newWhiteboardData.setIn(['drawingHistory'], []);
-      break;
+      return whiteboardData.setIn(['drawingHistory'], Immutable.fromJS([]));
 
-    default: return newWhiteboardData;
+    default: return whiteboardData;
   }
-
-  return newWhiteboardData;
 }
 
 /* ------------       DISPATCHERS     ------------------ */
