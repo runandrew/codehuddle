@@ -6,7 +6,7 @@ const db = require('APP/db');
 const Interview = db.define('interviews', {
   date: {
     type: Sequelize.DATE,
-    allowNull: false
+    default: new Date()
   },
   candidateName: Sequelize.STRING,
   position: Sequelize.STRING,
