@@ -11,7 +11,7 @@ import Close from 'material-ui/svg-icons/navigation/close';
 import AlertError from 'material-ui/svg-icons/alert/error';
 import Gesture from 'material-ui/svg-icons/content/gesture';
 
-import Whiteboard from '../Whiteboard';
+import WhiteboardContainer from '../WhiteboardContainer';
 import Editor from '../Editor';
 import InterviewRoomOptions from '../InterviewRoomOptions';
 
@@ -50,8 +50,9 @@ export class InterviewRoom extends React.Component {
   handleWBClose() {
     this.setState({ open: false, WBOpen: false });
   }
-  
+
   render() {
+    console.log('in interview room');
     return (
       <div id="ir-root" className="animated fadeIn">
         <AppBar
@@ -73,8 +74,7 @@ export class InterviewRoom extends React.Component {
           openSecondary={ true }
           docked={ true }
           width={ 650 }>
-          <IconButton><Close onTouchTap={ this.handleWBClose }/></IconButton>
-          <Whiteboard/>
+          <WhiteboardContainer handleClose={this.handleWBClose}/>
         </Drawer>
       {/* Page Content */}
         <div id="ir-content">

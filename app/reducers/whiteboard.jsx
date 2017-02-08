@@ -1,5 +1,6 @@
 // Required libraries
 import Immutable from 'immutable';
+import {DEFAULT_COLOR, DEFAULT_STROKE_SIZE} from '../components/WhiteboardConstants';
 
 /* -----------------    ACTIONS     ------------------ */
 const REQUEST_HISTORY = 'REQUEST_HISTORY';
@@ -46,8 +47,8 @@ const initialWhiteboardData = Immutable.fromJS({
   lastDraw: {
     lastPx: { x: null, y: null },
     currentPx: { x: null, y: null },
-    color: '#000000',
-    strokeWidth: 4
+    color: DEFAULT_COLOR,
+    strokeWidth: DEFAULT_STROKE_SIZE
   },
   drawingHistory: []
 });

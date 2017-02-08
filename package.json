@@ -67,6 +67,7 @@
     "react": "^15.3.2",
     "react-ace": "^4.1.1",
     "react-addons-test-utils": "^15.4.2",
+    "react-color": "^2.11.1",
     "react-dom": "^15.3.2",
     "react-konva": "^1.1.1",
     "react-line": "^1.0.2",
