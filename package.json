@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/queerviolet/bones#readme",
   "dependencies": {
+    "articles": "^0.2.1",
     "axios": "^0.15.2",
     "babel": "^6.5.2",
     "babel-core": "^6.18.0",
@@ -69,8 +70,8 @@
     "react-dom": "^15.3.2",
     "react-konva": "^1.1.1",
     "react-line": "^1.0.2",
-    "react-rating": "^0.6.5",
     "react-modal": "^1.6.5",
+    "react-rating": "^0.6.5",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "react-tap-event-plugin": "^2.0.1",

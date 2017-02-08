@@ -21,7 +21,7 @@ export const RateProblem = ({ problem, handleRate, candidateRating }) => {
 import { connect } from 'react-redux';
 
 // Required files
-import { setCandidateRating } from 'APP/app/reducers/problems';
+import { setCandidateRating } from 'APP/app/reducers/interviewProblems';
 
 const mapState = (state, ownProps) => {
   const { candidateRating } = ownProps.problem.interviewProblems;

@@ -17,7 +17,7 @@ const User = db.define('users', {
   // We support oauth, so users may or may not have passwords.
   password_digest: Sequelize.STRING,
 	password: Sequelize.VIRTUAL,
-  role: Sequelize.ENUM('interviewer', 'candidate')
+  isAdmin: Sequelize.BOOLEAN 
 }, {
 	indexes: [{fields: ['email'], unique: true,}],
   hooks: {

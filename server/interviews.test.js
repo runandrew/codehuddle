@@ -6,32 +6,20 @@ const Problem = require('APP/db/models/problem');
 const app = require('./start');
 
 describe('interviews router', () => {
-  let marla, betsy;
+  let marla;
   let createdInterview;
   before(() =>
     User.create({
       name: 'Marla', 
       email: 'marla@test.com', 
-      password: '1234', 
-      role: 'interviewer'
+      password: '1234'
     })
     .then(user => {
       marla = user;
     })
-    .then(() => 
-      User.create({
-        name: 'Betsy', 
-        email: 'betsy@test.com', 
-        password: '1234', 
-        role: 'candidate'
-      }))
-    .then(user => {
-      betsy = user;
-    })
     .then(() => Interview.create({
       date: '1/30/2017',
-      candidate: betsy.id,
-      interviewer: marla.id,
+      interviewer_id: marla.id,
       problems: [
         {name: 'Bitwise Add', difficulty: 'medium'},
         {name: 'Sudoku Validator', difficulty: 'medium'}
@@ -51,7 +39,6 @@ describe('interviews router', () => {
       .post('/api/interviews')
       .send({
         date: '1/30/2017',
-        candidate_id: createdInterview.candidate_id,
         interviewer_id: createdInterview.interviewer_id,
         position: 'Engineer'
       })
@@ -93,7 +80,6 @@ describe('interviews router', () => {
     before(() =>
       Interview.create({
         date: '1/30/2017',
-        candidate_id: betsy.id,
         interviewer_id: marla.id
       }) 
       .then(i => {

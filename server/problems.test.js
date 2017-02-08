@@ -5,7 +5,7 @@ const User = require('APP/db/models/user');
 const app = require('./start');
 
 describe('problems router', () => {
-  const bill = {name: 'Bill', email: 'bill@test.com', password: '1234', role: 'interviewer'};
+  const bill = {name: 'Bill', email: 'bill@test.com', password: '1234'};
   let createdProblem;
   before(() => 
     User.create(bill)
@@ -13,18 +13,12 @@ describe('problems router', () => {
 
   describe('POST /api/problems', () => {
     const testProblem = {name: 'String Search', difficulty: 'easy'};
-    it('responds with 401 when user is not interviewer', () =>
-      request(app)
-      .post('/api/problems')
-      .send(testProblem)
-      .expect(401)
-    );
     const agent = request.agent(app);
     before(() => agent
       .post('/api/auth/login')
       .send({username: bill.email, password: bill.password})
     );
-    it('creates a new problem when logged in as interviewer', () => agent
+    it('creates a new problem', () => agent
       .post('/api/problems')
       .send(testProblem)
       .expect(201)

@@ -7,12 +7,12 @@ import RateProblem from './RateProblem';
 
 /* -----------------    COMPONENT     ------------------ */
 
-export const FeedbackCandidate = ({ problems }) => {
+export const FeedbackCandidate = ({ interviewProblems }) => {
   return (
     <div>
       <p>We strive to deliver the best queality interviews. Please give us some feedback on our problems.</p>
       {
-        problems.map((problem, idx) => {
+        interviewProblems.map((problem, idx) => {
           // const { problem_id, interview_id } = problem.interviewProblems;
           return (
               <RateProblem
@@ -35,7 +35,7 @@ import { connect } from 'react-redux';
 
 const mapState = (state) => {
   return {
-    problems: state.interview.problems.toJS()
+    interviewProblems: state.interview.interviewProblems.toJS()
   };
 };
 

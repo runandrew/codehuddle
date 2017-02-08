@@ -8,6 +8,7 @@ const Interview = db.define('interviews', {
     type: Sequelize.DATE,
     allowNull: false
   },
+  candidateName: Sequelize.STRING,
   position: Sequelize.STRING,
   status: Sequelize.ENUM('planned', 'done'),
   candidateOverallRating: {

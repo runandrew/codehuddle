@@ -3,7 +3,7 @@ const db = require('APP/db');
 const Problem = db.model('problems');
 const {mustBeInterviewer} = require('./auth.filters');
 
-router.post('/', mustBeInterviewer, (req, res, next) => {
+router.post('/', (req, res, next) => {
   Problem.create(req.body)
   .then(createdProblem => res.status(201).send(createdProblem))
   .catch(next);

@@ -30,34 +30,37 @@ const uniqueRand = max => {
 
 const seedOrganizations = () => db.Promise.map(organizations, organization => db.model('organizations').create(organization));
 
-const seedCandidates = () => db.Promise.map(Array(...Array(50)).map(_ => ({
+const seedAdminUsers = () => db.Promise.map(Array(...Array(10)).map(_ => ({
   name: faker.name.findName(),
   email: faker.internet.email(),
   password: '1234',
-  role: 'candidate'
+  isAdmin: true
 })), user => db.model('users').create(user));
 
-const seedInterviewers = () => db.Promise.map(Array(...Array(50)).map(_ => ({
+const seedUsers = () => db.Promise.map(Array(...Array(50)).map(_ => ({
   name: faker.name.findName(),
   email: faker.internet.email(),
   password: '1234',
-  role: 'interviewer',
   organization_name: organizations[rand(organizations.length - 1)].name
 })), user => db.model('users').create(user));
 
 const seedProblems = () => db.Promise.map(Array(...Array(200)).map(_ => ({
   name: faker.lorem.words(),
   description: faker.lorem.sentence(),
-  solution: faker.lorem.paragraph(),
   difficulty: ['easy', 'medium', 'hard'][rand(2)],
-  bigO: bigOs[rand(bigOs.length - 1)],
   organization_name: organizations[rand(organizations.length - 1)].name,
-  author_id: rand(51, 100)
+  author_id: rand(11, 60)
 })), problem => db.model('problems').create(problem));
 
+const seedSolutions = () => db.Promise.map(Array(...Array(400)).map(_ => ({
+  code: faker.lorem.paragraph(),
+  bigO: bigOs[rand(bigOs.length - 1)],
+  problem_id: rand(1, 200)
+})), solution => db.model('solutions').create(solution));
+
 const seedInterviews = () => db.Promise.map(Array(...Array(50)).map(_ => ({
-  candidate_id: rand(1, 50),
-  interviewer_id: rand(51, 100),
+  candidateName: faker.name.findName(),
+  interviewer_id: rand(11, 60),
   date: faker.date.future(),
   position: faker.name.jobType(),
   status: ['planned', 'done'][rand(1)],
@@ -76,12 +79,14 @@ db.didSync
   .then(() => db.sync({force: true}))
   .then(seedOrganizations)
   .then(organizations => console.log(`Seeded ${organizations.length} organizations OK`))
-  .then(seedCandidates)
-  .then(candidates => console.log(`Seeded ${candidates.length} candidates OK`))
-  .then(seedInterviewers)
-  .then(interviewers => console.log(`Seeded ${interviewers.length} interviewers OK`))
+  .then(seedAdminUsers)
+  .then(users => console.log(`Seeded ${users.length} admins OK`))
+  .then(seedUsers)
+  .then(users => console.log(`Seeded ${users.length} users OK`))
   .then(seedProblems)
   .then(problems => console.log(`Seeded ${problems.length} problems OK`))
+  .then(seedSolutions)
+  .then(solutions => console.log(`Seeded ${solutions.length} solutions OK`))
   .then(seedInterviews)
   .then(interviews => console.log(`Seeded ${interviews.length} interviews OK`))
   .then(seedInterviewProblems)

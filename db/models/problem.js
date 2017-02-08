@@ -9,9 +9,7 @@ const Problem = db.define('problems', {
     allowNull: false
   },
   description: Sequelize.TEXT,
-  solution: Sequelize.TEXT,
-  difficulty: Sequelize.ENUM('easy', 'medium', 'hard'),
-  bigO: Sequelize.STRING
+  difficulty: Sequelize.ENUM('easy', 'medium', 'hard')
 });
 
 module.exports = Problem;
