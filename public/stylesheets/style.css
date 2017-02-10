@@ -300,4 +300,9 @@ nav {
   background-color: pink;
   position: absolute; }
 
+fieldset {
+  border: none;
+  margin: 0;
+  padding-left: 1rem; }
+
 /*# sourceMappingURL=style.css.map */

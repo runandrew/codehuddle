@@ -95,8 +95,8 @@ export default function reducer (editorData = initialEditorData, action) {
 
 /* ------------       DISPATCHERS     ------------------ */
 
-export const parseEvt = evt => {
+export const parseEvt = (checked, name) => {
   const status = {};
-  status[evt.target.id] = evt.target.checked;
+  status[name] = checked;
   return status;
 };
